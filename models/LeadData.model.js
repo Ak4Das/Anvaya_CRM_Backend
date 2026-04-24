@@ -1,0 +1,73 @@
+import mongoose from "mongoose"
+
+const leadSchema = new mongoose.Schema(
+  {
+    leadCode: {
+      type: String,
+      unique: true,
+    },
+    name: {
+      type: String,
+      required: [true, "Sales Agent name is required"],
+    },
+    status: {
+      type: String,
+      enum: [
+        "New",
+        "Contacted",
+        "Qualified",
+        "Proposal Sent",
+        "Closed",
+        "Lost",
+      ],
+      required: true,
+    },
+    salesAgent: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+    source: {
+      type: String,
+      enum: [
+        `Website`,
+        `YouTube`,
+        `Instagram`,
+        `Facebook`,
+        `News paper`,
+        `Our Customers`,
+        `Referral`,
+        `Television Ad`,
+        `Google`,
+        `Other`,
+      ],
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    tags: {
+      type: String,
+      required: true,
+    },
+    timeToClose: {
+      type: Number,
+      default: null,
+    },
+    priority: {
+      type: String,
+      required: true,
+    },
+    closedAt: {
+      type: String,
+      default: "",
+    },
+    lostAt: {
+      type: String,
+    },
+  },
+  { timestamps: true },
+)
+
+const Lead = mongoose.model("Lead", leadSchema)
+
+export default Lead

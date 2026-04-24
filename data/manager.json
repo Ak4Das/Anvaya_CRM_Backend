@@ -1,0 +1,13 @@
+{
+    "managerCode": "M-7207252",
+    "name": "John Doe",
+    "dateOfBirth": "1995-08-25",
+    "country": "United States",
+    "phoneNumber": "(+1)8025650123",
+    "email": "john@gmail.com",
+    "profileImg": "https://tse2.mm.bing.net/th/id/OIP.najaFGAmxMA_ftIhsZ3qmQHaFZ?pid=Api&P=0&h=180",
+    "role": "Sales Manager",
+    "location": "Office",
+    "department": "Sales",
+    "status": "Active"
+}
