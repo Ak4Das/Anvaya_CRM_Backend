@@ -1,0 +1,1 @@
+import LeadModel from "../models/LeadData.model"

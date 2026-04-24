@@ -2,15 +2,6 @@
 import ConnectToDatabase from "./db/db.connect.js"
 ConnectToDatabase()
 
-// import SeedManager from "./seeders/manager.seeder.js"
-// SeedManager()
-
-// import SeedSalesAgent from "./seeders/salesAgent.seeder.js"
-// SeedSalesAgent()
-
-// import SeedLead from "./seeders/lead.seeder.js"
-// SeedLead()
-
 // CREATE SERVER
 import express from "express"
 const app = express()
