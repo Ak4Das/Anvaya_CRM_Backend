@@ -20,8 +20,7 @@ function getStartAndEndDate(minDay, maxDay) {
 export const getLeadsByPropertyInATimeRange = async (
   minDay,
   maxDay,
-  property,
-  value,
+  filters,
 ) => {
   try {
     const { startDate, endDate } = getStartAndEndDate(minDay, maxDay)
@@ -33,9 +32,12 @@ export const getLeadsByPropertyInATimeRange = async (
       },
     }
 
-    if (property && value) {
-      filter[property] = value
-    }
+    filters &&
+      Object.entries(JSON.parse(filters)).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+          filter[key] = value
+        }
+      })
 
     const leads = await LeadModel.find(filter)
 
