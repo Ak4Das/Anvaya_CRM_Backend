@@ -31,3 +31,12 @@ export const getAllLeadsCreatedInATimeRange = async (
     throw error
   }
 }
+
+export const getLeadByStatus = async (status) => {
+  try {
+    const leads = await LeadModel.find({ status })
+    return leads
+  } catch (error) {
+    throw error
+  }
+}
