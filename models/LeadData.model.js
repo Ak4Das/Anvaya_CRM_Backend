@@ -24,7 +24,7 @@ const leadSchema = new mongoose.Schema({
       `YouTube`,
       `Instagram`,
       `Facebook`,
-      `News paper`,
+      `News Paper`,
       `Our Customers`,
       `Referral`,
       `Television Ad`,
@@ -39,6 +39,7 @@ const leadSchema = new mongoose.Schema({
   },
   tags: {
     type: String,
+    enum:[`High Value`, `Follow Up`],
     required: true,
   },
   timeToClose: {
