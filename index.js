@@ -16,6 +16,10 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
+// Routes
+import leadRoutes from "./routes/Lead.routes.js"
+app.use("/leads", leadRoutes)
+
 // START SERVER
 app.listen(3000, () => {
   console.log("Server started at port : ", 3000)
