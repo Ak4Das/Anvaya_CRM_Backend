@@ -1,40 +1,44 @@
 import LeadModel from "../models/LeadData.model.js"
 
-export const getAllLeadsCreatedInATimeRange = async (
-  firstValue,
-  secondValue,
+function getStartAndEndDate(minDay, maxDay) {
+  const today = new Date()
+
+  const firstPastDate = new Date()
+  firstPastDate.setDate(today.getDate() - minDay)
+
+  const secondPastDate = new Date()
+  secondPastDate.setDate(today.getDate() - maxDay)
+
+  const formatDate = (date) => date.toISOString().split("T")[0]
+
+  const startDate = formatDate(secondPastDate)
+  const endDate = formatDate(firstPastDate)
+
+  return { startDate, endDate }
+}
+
+export const getLeadsByPropertyInATimeRange = async (
+  minDay,
+  maxDay,
+  property,
+  value,
 ) => {
   try {
-    const today = new Date()
+    const { startDate, endDate } = getStartAndEndDate(minDay, maxDay)
 
-    const firstPastDate = new Date()
-    firstPastDate.setDate(today.getDate() - firstValue)
-
-    const secondPastDate = new Date()
-    secondPastDate.setDate(today.getDate() - secondValue)
-
-    const formatDate = (date) => date.toISOString().split("T")[0]
-
-    const startDate = formatDate(secondPastDate)
-    console.log(startDate)
-    const endDate = formatDate(firstPastDate)
-    console.log(endDate)
-
-    const leads = await LeadModel.find({
+    const filter = {
       createdAt: {
         $gte: startDate,
         $lte: endDate,
       },
-    })
-    return leads
-  } catch (error) {
-    throw error
-  }
-}
+    }
 
-export const getLeadByStatus = async (status) => {
-  try {
-    const leads = await LeadModel.find({ status })
+    if (property && value) {
+      filter[property] = value
+    }
+
+    const leads = await LeadModel.find(filter)
+
     return leads
   } catch (error) {
     throw error

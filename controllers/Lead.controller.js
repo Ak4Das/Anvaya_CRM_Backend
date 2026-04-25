@@ -1,23 +1,16 @@
 import {
-  getAllLeadsCreatedInATimeRange,
-  getLeadByStatus,
+  getLeadsByPropertyInATimeRange,
 } from "../services/Lead.service.js"
 
-export const fetchAllLeadsCreatedInATimeRange = async (req, res) => {
+export const fetchLeadsByPropertyInATimeRange = async (req, res) => {
   try {
-    const { minDay, maxDay } = req.query
-    const leads = await getAllLeadsCreatedInATimeRange(minDay, maxDay)
-    res.status(200)
-    res.json(leads)
-  } catch (error) {
-    throw error
-  }
-}
-
-export const fetchLeadByStatus = async (req, res) => {
-  try {
-    const { status } = req.params
-    const leads = await getLeadByStatus(status)
+    const { minDay, maxDay, property, value } = req.query
+    const leads = await getLeadsByPropertyInATimeRange(
+      minDay,
+      maxDay,
+      property,
+      value,
+    )
     res.status(200)
     res.json(leads)
   } catch (error) {
