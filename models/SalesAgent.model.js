@@ -47,6 +47,10 @@ const salesAgentSchema = new mongoose.Schema(
       type: String,
       default: "Sales",
     },
+    joinedDate: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       enum: ["Active", "Inactive"],
