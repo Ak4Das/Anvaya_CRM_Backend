@@ -21,7 +21,7 @@ const leadSchema = new mongoose.Schema({
     type: String,
     enum: [
       `Website`,
-      `YouTube`,
+      `Youtube`,
       `Instagram`,
       `Facebook`,
       `News Paper`,
