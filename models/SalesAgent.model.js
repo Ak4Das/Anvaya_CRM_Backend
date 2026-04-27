@@ -10,6 +10,10 @@ const salesAgentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Sales Agent name is required"],
     },
+    age: {
+      type: Number,
+      required: [true, "Sales Agent age is required"],
+    },
     dateOfBirth: {
       type: String,
       required: [true, "Sales Agent DOB is required"],
@@ -21,6 +25,10 @@ const salesAgentSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
       required: [true, "Sales Agent phone number is required"],
+    },
+    phoneNumberNormalized: {
+      type: String,
+      required: true,
     },
     email: {
       type: String,
@@ -38,6 +46,7 @@ const salesAgentSchema = new mongoose.Schema(
     },
     manager: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
     location: {
       type: String,

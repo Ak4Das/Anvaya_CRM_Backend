@@ -18,7 +18,6 @@ export const fetchAllAgents = async (req, res) => {
 export const fetchAgentByName = async (req, res) => {
   try {
     const { name } = req.params
-    console.log(name)
     const agent = await getAgentByName(name)
     res.status(200)
     res.json(agent)
@@ -39,7 +38,7 @@ export const fetchByIdAndUpdate = async (req, res) => {
 
 export const fetchAgentsByProperty = async (req, res) => {
   try {
-    const { filters } = req.query
+    const filters = JSON.parse(decodeURIComponent(req.query.filters))
     const Agents = await getAgentsByProperty(filters)
     res.status(200)
     res.json(Agents)
