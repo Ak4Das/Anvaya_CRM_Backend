@@ -26,6 +26,9 @@ app.use("/agents", agentRoutes)
 import managerRoutes from "./routes/Manager.routes.js"
 app.use("/managers", managerRoutes)
 
+import salesDataRoutes from "./routes/SalesData.routes.js"
+app.use("/sales", salesDataRoutes)
+
 // START SERVER
 app.listen(3000, () => {
   console.log("Server started at port : ", 3000)
