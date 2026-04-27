@@ -16,6 +16,7 @@ const leadSchema = new mongoose.Schema({
   },
   salesAgent: {
     type: mongoose.Schema.Types.ObjectId,
+    required: true,
   },
   source: {
     type: String,
@@ -39,7 +40,7 @@ const leadSchema = new mongoose.Schema({
   },
   tags: {
     type: String,
-    enum:[`High Value`, `Follow Up`],
+    enum: [`High Value`, `Follow Up`],
     required: true,
   },
   timeToClose: {
