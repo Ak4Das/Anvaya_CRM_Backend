@@ -7,7 +7,7 @@ const leadSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: [true, "Sales Agent name is required"],
+    required: true,
   },
   status: {
     type: String,
@@ -64,7 +64,7 @@ const leadSchema = new mongoose.Schema({
   },
   updatedAt: {
     type: String,
-    required: true,
+    default: "",
   },
 })
 

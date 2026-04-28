@@ -1,4 +1,7 @@
-import { getLeadsByPropertyInATimeRange } from "../services/Lead.service.js"
+import {
+  getLeadsByPropertyInATimeRange,
+  postNewLead,
+} from "../services/Lead.service.js"
 
 export const fetchLeadsByPropertyInATimeRange = async (req, res) => {
   try {
@@ -6,6 +9,16 @@ export const fetchLeadsByPropertyInATimeRange = async (req, res) => {
     const leads = await getLeadsByPropertyInATimeRange(minDay, maxDay, filters)
     res.status(200)
     res.json(leads)
+  } catch (error) {
+    throw error
+  }
+}
+
+export const createANewLead = async (req, res) => {
+  try {
+    const response = await postNewLead(req.body)
+    res.status(200)
+    res.json(response)
   } catch (error) {
     throw error
   }

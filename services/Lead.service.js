@@ -46,3 +46,13 @@ export const getLeadsByPropertyInATimeRange = async (
     throw error
   }
 }
+
+export const postNewLead = async (newLead) => {
+  try {
+    const NewLead = new LeadModel(newLead)
+    await NewLead.save()
+    return NewLead
+  } catch (error) {
+    throw error
+  }
+}
