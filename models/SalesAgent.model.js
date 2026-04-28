@@ -4,27 +4,24 @@ const salesAgentSchema = new mongoose.Schema(
   {
     agentCode: {
       type: String,
+      required: true,
       unique: true,
     },
     name: {
       type: String,
-      required: [true, "Sales Agent name is required"],
-    },
-    age: {
-      type: Number,
-      required: [true, "Sales Agent age is required"],
+      required: true,
     },
     dateOfBirth: {
       type: String,
-      required: [true, "Sales Agent DOB is required"],
+      required: true,
     },
     country: {
       type: String,
-      required: [true, "Sales Agent country is required"],
+      required: true,
     },
     phoneNumber: {
       type: String,
-      required: [true, "Sales Agent phone number is required"],
+      required: true,
     },
     phoneNumberNormalized: {
       type: String,
@@ -32,38 +29,44 @@ const salesAgentSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Sales Agent email is required"],
+      required: true,
       unique: true,
       lowercase: true,
     },
     profileImg: {
       type: String,
-      required: [true, "Sales Agent profile image is required"],
+      required: true,
     },
     role: {
       type: String,
+      required: true,
       default: "Sales Agent",
     },
     manager: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      default: "69eafb7ba796c8a7b4a87429",
     },
     location: {
       type: String,
+      required: true,
       default: "Office",
     },
     department: {
       type: String,
+      required: true,
       default: "Sales",
     },
     joinedDate: {
       type: String,
       required: true,
+      required: true,
     },
     status: {
       type: String,
       enum: ["Active", "Inactive"],
-      default: "Active",
+      required: true,
+      default: "Inactive",
     },
   },
   { timestamps: true },

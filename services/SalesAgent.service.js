@@ -51,3 +51,13 @@ export const getAgentsByProperty = async (filters) => {
     throw error
   }
 }
+
+export const postNewAgent = async (newAgent) => {
+  try {
+    const NewAgent = new SalesAgentModel(newAgent)
+    await NewAgent.save()
+    return NewAgent
+  } catch (error) {
+    throw error
+  }
+}

@@ -2,7 +2,8 @@ import {
   fetchAllAgents,
   fetchAgentByName,
   fetchByIdAndUpdate,
-  fetchAgentsByProperty
+  fetchAgentsByProperty,
+  createANewAgent
 } from "../controllers/SalesAgent.controller.js"
 
 import express from "express"
@@ -15,5 +16,7 @@ router.get("/name/:name", fetchAgentByName)
 router.get("/prop", fetchAgentsByProperty)
 
 router.patch("/update/:id", fetchByIdAndUpdate)
+
+router.post("/addAgent", createANewAgent)
 
 export default router
