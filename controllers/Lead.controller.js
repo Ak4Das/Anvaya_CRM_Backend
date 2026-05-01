@@ -1,6 +1,7 @@
 import {
   getLeadsByPropertyInATimeRange,
   postNewLead,
+  findLeadByIdAndUpdate
 } from "../services/Lead.service.js"
 
 export const fetchLeadsByPropertyInATimeRange = async (req, res) => {
@@ -19,6 +20,16 @@ export const createANewLead = async (req, res) => {
     const response = await postNewLead(req.body)
     res.status(200)
     res.json(response)
+  } catch (error) {
+    throw error
+  }
+}
+
+export const updateLead = async (req, res) => {
+  try {
+    const updatedLead = await findLeadByIdAndUpdate(req.params.id, req.body)
+    res.status(200)
+    res.json(updatedLead)
   } catch (error) {
     throw error
   }

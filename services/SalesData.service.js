@@ -1,7 +1,7 @@
 import SalesDataModel from "../models/SalesData.model.js"
 
 function getStartAndEndDate(minDay, maxDay) {
-  const today = new Date()
+  const today = new Date() // 2026-04-24
 
   const firstPastDate = new Date()
   firstPastDate.setDate(today.getDate() - minDay)

@@ -1,7 +1,7 @@
 import LeadModel from "../models/LeadData.model.js"
 
 function getStartAndEndDate(minDay, maxDay) {
-  const today = new Date()
+  const today = new Date() // 2026-04-24
 
   const firstPastDate = new Date()
   firstPastDate.setDate(today.getDate() - minDay)
@@ -52,6 +52,17 @@ export const postNewLead = async (newLead) => {
     const NewLead = new LeadModel(newLead)
     await NewLead.save()
     return NewLead
+  } catch (error) {
+    throw error
+  }
+}
+
+export const findLeadByIdAndUpdate = async (id, dataToUpdate) => {
+  try {
+    const lead = await LeadModel.findByIdAndUpdate(id, dataToUpdate, {
+      new: true,
+    })
+    return lead
   } catch (error) {
     throw error
   }
