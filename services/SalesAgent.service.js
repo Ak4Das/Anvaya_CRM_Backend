@@ -36,9 +36,8 @@ export const findByIdAndUpdate = async (id, dataToUpdate) => {
 export const getAgentsByProperty = async (filters) => {
   try {
     const filter = {}
-
     filters &&
-      Object.entries(JSON.parse(filters)).forEach(([key, value]) => {
+      Object.entries(filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
           filter[key] = value
         }
