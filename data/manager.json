@@ -1,4 +1,6 @@
-{
+[
+  {
+    "_id": "69eafb7ba796c8a7b4a87429",
     "managerCode": "M-7207252",
     "name": "John Doe",
     "dateOfBirth": "1995-08-25",
@@ -9,5 +11,9 @@
     "role": "Sales Manager",
     "location": "Office",
     "department": "Sales",
-    "status": "Active"
-}
+    "status": "Active",
+    "__v": 0,
+    "createdAt": "2026-04-24T05:11:23.868Z",
+    "updatedAt": "2026-04-24T05:11:23.868Z"
+  }
+]
