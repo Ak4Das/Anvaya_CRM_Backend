@@ -32,6 +32,9 @@ app.use("/sales", salesDataRoutes)
 import agentCommentRoutes from "./routes/AgentComment.routes.js"
 app.use("/agentComment", agentCommentRoutes)
 
+import { globalErrorHandler } from "./middlewares/errorMiddleware.js"
+app.use(globalErrorHandler)
+
 // START SERVER
 app.listen(3000, () => {
   console.log("Server started at port : ", 3000)

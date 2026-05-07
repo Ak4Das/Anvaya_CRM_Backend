@@ -1,3 +1,4 @@
+import { ValidationError } from "../utils/customErrorHandler.js"
 import LeadModel from "../models/LeadData.model.js"
 
 function getStartAndEndDate(minDay, maxDay) {
@@ -47,13 +48,21 @@ export const getLeadsByPropertyInATimeRange = async (
   }
 }
 
-export const postNewLead = async (newLead) => {
+export const postNewLead = async (req, res) => {
   try {
-    const NewLead = new LeadModel(newLead)
-    await NewLead.save()
-    return NewLead
+    const NewLead = new LeadModel(req.body)
+    const savedLead = await NewLead.save()
+    res.status(200)
+    res.json(savedLead)
   } catch (error) {
-    throw error
+    if (
+      error.cause?.code === 11000 &&
+      error.message === "leadCode must be unique"
+    ) {
+      throw new ValidationError("leadCode must be unique!", error.cause)
+    } else {
+      throw error
+    }
   }
 }
 
