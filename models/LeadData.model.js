@@ -3,11 +3,17 @@ import mongoose from "mongoose"
 const leadSchema = new mongoose.Schema({
   leadCode: {
     type: String,
-    unique: true,
+    unique: [true, "leadCode must be unique"],
+    required: [true, "leadCode must exist"],
+    match: [/^LD-\d+$/, 'leadCode must be in format like "LD-41681509"'],
   },
   name: {
     type: String,
-    required: [true, "name is required and must be a string."],
+    required: [true, "name is required."],
+    match: [
+      /^[A-Za-z]+(?: [A-Za-z]+)+$/,
+      "Enter name in format like 'John Doe'",
+    ],
   },
   status: {
     type: String,
@@ -43,6 +49,10 @@ const leadSchema = new mongoose.Schema({
   phoneNumber: {
     type: String,
     required: [true, "Phone number is required."],
+    match: [
+      /^\(\+\d{1,3}\)\d+$/,
+      "Phone number must be in format like (+91)9865327541",
+    ],
   },
   tags: {
     type: String,
@@ -51,11 +61,13 @@ const leadSchema = new mongoose.Schema({
   },
   timeToClose: {
     type: Number,
-    require: [true, "timeToClose must be a positive integer btw 0 to 30."],
-    default: null,
+    required: [true, "timeToClose is required."],
+    min: [0, "timeToClose must be at least 0."],
+    max: [30, "timeToClose must be at most 30."],
   },
   priority: {
     type: String,
+    enum: [`High`, `Medium`, `Low`],
     required: [true, "priority must be one of High, Medium, Low."],
   },
   closedAt: {
