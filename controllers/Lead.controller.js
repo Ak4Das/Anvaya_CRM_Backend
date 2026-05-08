@@ -5,25 +5,10 @@ import {
   findLeadByIdAndUpdate,
 } from "../services/Lead.service.js"
 
-export const fetchLeadsByPropertyInATimeRange = async (req, res) => {
-  try {
-    const { minDay, maxDay, filters } = req.query
-    const leads = await getLeadsByPropertyInATimeRange(minDay, maxDay, filters)
-    res.status(200)
-    res.json(leads)
-  } catch (error) {
-    throw error
-  }
-}
+export const fetchLeadsByPropertyInATimeRange = asyncHandler(
+  getLeadsByPropertyInATimeRange,
+)
 
 export const createANewLead = asyncHandler(postNewLead)
 
-export const updateLead = async (req, res) => {
-  try {
-    const updatedLead = await findLeadByIdAndUpdate(req.params.id, req.body)
-    res.status(200)
-    res.json(updatedLead)
-  } catch (error) {
-    throw error
-  }
-}
+export const updateLead = asyncHandler(findLeadByIdAndUpdate)

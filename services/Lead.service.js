@@ -1,4 +1,8 @@
-import { ValidationError } from "../utils/customErrorHandler.js"
+import {
+  BadRequestError,
+  NotFoundError,
+  ValidationError,
+} from "../utils/customErrorHandler.js"
 import LeadModel from "../models/LeadData.model.js"
 
 function getStartAndEndDate(minDay, maxDay) {
@@ -18,12 +22,10 @@ function getStartAndEndDate(minDay, maxDay) {
   return { startDate, endDate }
 }
 
-export const getLeadsByPropertyInATimeRange = async (
-  minDay,
-  maxDay,
-  filters,
-) => {
+export const getLeadsByPropertyInATimeRange = async (req, res) => {
   try {
+    const { minDay, maxDay, filters } = req.query
+
     const { startDate, endDate } = getStartAndEndDate(minDay, maxDay)
 
     const filter = {
@@ -42,9 +44,14 @@ export const getLeadsByPropertyInATimeRange = async (
 
     const leads = await LeadModel.find(filter)
 
-    return leads
+    if (!leads.length) {
+      throw new NotFoundError("Leads not found!")
+    }
+
+    res.status(200)
+    res.json(leads)
   } catch (error) {
-    throw error
+    throw new BadRequestError(error.message, error.stack)
   }
 }
 
@@ -66,13 +73,29 @@ export const postNewLead = async (req, res) => {
   }
 }
 
-export const findLeadByIdAndUpdate = async (id, dataToUpdate) => {
+export const findLeadByIdAndUpdate = async (req, res) => {
   try {
-    const lead = await LeadModel.findByIdAndUpdate(id, dataToUpdate, {
-      new: true,
-    })
-    return lead
+    const lead = await LeadModel.findById(req.params.id)
+
+    if (!lead) {
+      throw new NotFoundError("Lead not found!")
+    }
+
+    const updatedLead = await LeadModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      },
+    )
+
+    res.status(200)
+    res.json(updatedLead)
   } catch (error) {
-    throw error
+    if (error.kind === "ObjectId") {
+      throw new BadRequestError(error.reason.message, error.reason.stack)
+    } else {
+      throw new BadRequestError(error.message, error.stack)
+    }
   }
 }

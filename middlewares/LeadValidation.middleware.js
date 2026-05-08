@@ -1,8 +1,8 @@
 import { ValidationError } from "../utils/customErrorHandler.js"
 
 export const leadValidation = (schema) => async (req, res, next) => {
-  const body = req.body
   try {
+    const body = req.body
     await schema.validate(body)
     next()
   } catch (error) {
