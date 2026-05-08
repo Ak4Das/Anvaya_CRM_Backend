@@ -40,20 +40,20 @@ export const leadSchema = yup.object({
     .oneOf(
       [
         `Website`,
-        `YouTube`,
+        `Youtube`,
         `Instagram`,
         `Facebook`,
-        `News paper`,
+        `News Paper`,
         `Our Customers`,
         `Referral`,
         `Television Ad`,
         `Google`,
         `Other`,
       ],
-      "source is required and must be one of the predefined values (`Website`, `YouTube`, `Instagram`, `Facebook`, `News paper`, `Our Customers`, `Referral`, `Television Ad`,`Google`,`Other`).",
+      "source is required and must be one of the predefined values (`Website`, `Youtube`, `Instagram`, `Facebook`, `News paper`, `Our Customers`, `Referral`, `Television Ad`,`Google`,`Other`).",
     )
     .required(
-      "source is required and must be one of the predefined values (`Website`, `YouTube`, `Instagram`, `Facebook`, `News paper`, `Our Customers`, `Referral`, `Television Ad`,`Google`,`Other`).",
+      "source is required and must be one of the predefined values (`Website`, `Youtube`, `Instagram`, `Facebook`, `News paper`, `Our Customers`, `Referral`, `Television Ad`,`Google`,`Other`).",
     ),
   phoneNumber: yup
     .string()

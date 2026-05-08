@@ -63,28 +63,15 @@ export const agentSchema = yup.object({
     .strict()
     .typeError("profileImg must be a string")
     .required("Profile image is required."),
-  role: yup
-    .string()
-    .strict()
-    .typeError("role must be a string")
-    .required(),
+  role: yup.string().strict().typeError("role must be a string"),
   manager: yup
     .string()
     .strict()
     .typeError("manager must be a string")
-    .required("manager is required.")
-    .matches(/^[0-9a-fA-F]{24}$/, "manager must be a valid ObjectId."),
-  location: yup
-    .string()
-    .strict()
-    .typeError("location must be a string")
-    .required("location is required."),
-  department: yup
-    .string()
-    .strict()
-    .typeError("department must be a string")
-    .required("department is required.")
-    .default("Sales"),
+    .matches(/^[0-9a-fA-F]{24}$/, "manager must be a valid ObjectId.")
+    .required("manager is required."),
+  location: yup.string().strict().typeError("location must be a string"),
+  department: yup.string().strict().typeError("department must be a string"),
   joinedDate: yup
     .string()
     .strict()
@@ -95,8 +82,7 @@ export const agentSchema = yup.object({
     .string()
     .strict()
     .typeError("status must be a string")
-    .oneOf(["Active", "Inactive"], "status must be one of Active or Inactive.")
-    .required("status is required"),
+    .oneOf(["Active", "Inactive"], "status must be one of Active or Inactive."),
   password: yup
     .string()
     .strict()

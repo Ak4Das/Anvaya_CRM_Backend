@@ -84,7 +84,7 @@ const salesAgentSchema = new mongoose.Schema(
       type: String,
       enum: ["Active", "Inactive"],
       required: [true, "status is required"],
-      default: "Inactive",
+      default: "Active",
     },
     password: {
       type: String,

@@ -1,7 +1,7 @@
 import { AppError } from "../utils/customErrorHandler.js"
 
 export const globalErrorHandler = (err, req, res, next) => {
-  // console.error(err)
+  console.error(err)
 
   const isDev = process.env.NODE_ENV === "development"
 
