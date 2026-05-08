@@ -58,11 +58,9 @@ export const postNewLead = async (req, res) => {
     res.status(200)
     res.json(savedLead)
   } catch (error) {
-    if (
-      error.cause?.code === 11000 &&
-      error.message === "leadCode must be unique"
-    ) {
-      throw new ValidationError("leadCode must be unique!", error.cause)
+    if (error.cause.code === 11000) {
+      const field = Object.keys(error.cause.keyPattern)[0]
+      throw new ValidationError(`${field} must be unique`, error.cause)
     } else {
       throw error
     }
@@ -82,14 +80,22 @@ export const findLeadByIdAndUpdate = async (req, res) => {
       req.body,
       {
         new: true,
+        runValidators: true,
       },
     )
+
+    if (!updatedLead) {
+      throw new NotFoundError("Lead not found!")
+    }
 
     res.status(200)
     res.json(updatedLead)
   } catch (error) {
     if (error.kind === "ObjectId") {
       throw new BadRequestError(error.reason.message, error.reason.stack)
+    } else if (error.cause.code === 11000) {
+      const field = Object.keys(error.cause.keyPattern)[0]
+      throw new ValidationError(`${field} must be unique`, error.cause)
     } else {
       throw new BadRequestError(error.message, error.stack)
     }

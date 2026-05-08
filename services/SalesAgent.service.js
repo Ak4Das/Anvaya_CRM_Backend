@@ -87,7 +87,8 @@ export const postNewAgent = async (req, res) => {
     if (error.name === "ValidationError") {
       throw new ValidationError(error.message)
     } else if (error.code === 11000) {
-      throw new BadRequestError("Agent already exists")
+      const field = Object.keys(error.keyPattern)[0]
+      throw new ValidationError(`${field} must be unique`)
     } else {
       throw error
     }
