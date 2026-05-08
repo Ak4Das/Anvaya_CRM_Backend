@@ -1,41 +1,66 @@
+import mongoose from "mongoose"
 import SalesAgentModel from "../models/SalesAgent.model.js"
+import {
+  BadRequestError,
+  NotFoundError,
+  ValidationError,
+} from "../utils/customErrorHandler.js"
 
-export const getAllAgents = async () => {
+export const getAllAgents = async (req, res) => {
   try {
     const saleAgents = await SalesAgentModel.find()
-    return saleAgents
+    res.status(200)
+    res.json(saleAgents)
   } catch (error) {
     throw error
   }
 }
 
-export const getAgentByName = async (name) => {
+export const getAgentByName = async (req, res) => {
   try {
+    const { name } = req.params
     const agent = await SalesAgentModel.find({ name })
-    return agent
+    if (agent.length === 0) {
+      throw new NotFoundError("Agent not found")
+    }
+    res.status(200)
+    res.json(agent)
   } catch (error) {
     throw error
   }
 }
 
-export const findByIdAndUpdate = async (id, dataToUpdate) => {
+export const findByIdAndUpdate = async (req, res) => {
   try {
-    const agent = await SalesAgentModel.findOneAndUpdate(
-      { _id: id },
-      dataToUpdate,
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw new ValidationError("Invalid agent id")
+    }
+    const updatedAgent = await SalesAgentModel.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
       {
         new: true,
       },
     )
-    return agent
+    if (!updatedAgent) {
+      throw new NotFoundError("Agent not found")
+    }
+    res.status(200)
+    res.json(updatedAgent)
   } catch (error) {
     throw error
   }
 }
 
-export const getAgentsByProperty = async (filters) => {
+export const getAgentsByProperty = async (req, res) => {
   try {
+    if (!req.query.filters) {
+      throw new ValidationError("filters query is required")
+    }
+    const filters = JSON.parse(decodeURIComponent(req.query.filters))
+
     const filter = {}
+
     filters &&
       Object.entries(JSON.parse(filters)).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
@@ -45,18 +70,26 @@ export const getAgentsByProperty = async (filters) => {
 
     const Agents = await SalesAgentModel.find(filter)
 
-    return Agents
+    res.status(200)
+    res.json(Agents)
   } catch (error) {
     throw error
   }
 }
 
-export const postNewAgent = async (newAgent) => {
+export const postNewAgent = async (req, res) => {
   try {
-    const NewAgent = new SalesAgentModel(newAgent)
+    const NewAgent = new SalesAgentModel(req.body)
     await NewAgent.save()
-    return NewAgent
+    res.status(200)
+    res.json(NewAgent)
   } catch (error) {
-    throw error
+    if (error.name === "ValidationError") {
+      throw new ValidationError(error.message)
+    } else if (error.code === 11000) {
+      throw new BadRequestError("Agent already exists")
+    } else {
+      throw error
+    }
   }
 }
