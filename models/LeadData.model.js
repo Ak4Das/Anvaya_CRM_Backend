@@ -72,17 +72,37 @@ const leadSchema = new mongoose.Schema({
   },
   closedAt: {
     type: String,
+    validate: {
+      validator: function (value) {
+        if (!value) return true
+
+        return /^\d{4}-\d{2}-\d{2}$/.test(value)
+      },
+
+      message: "closedAt must be in format yyyy-mm-dd",
+    },
     default: "",
   },
   lostAt: {
     type: String,
+    match: [/^\d{4}-\d{2}-\d{2}$/, "lostAt must be in format yyyy-mm-dd"],
   },
   createdAt: {
     type: String,
     required: true,
+    match: [/^\d{4}-\d{2}-\d{2}$/, "createdAt must be in format yyyy-mm-dd"],
   },
   updatedAt: {
     type: String,
+    validate: {
+      validator: function (value) {
+        if (!value) return true
+
+        return /^\d{4}-\d{2}-\d{2}$/.test(value)
+      },
+
+      message: "updatedAt must be in format yyyy-mm-dd",
+    },
     default: "",
   },
 })
