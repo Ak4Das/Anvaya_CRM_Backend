@@ -44,10 +44,6 @@ export const getLeadsByPropertyInATimeRange = async (req, res) => {
 
     const leads = await LeadModel.find(filter)
 
-    if (!leads.length) {
-      throw new NotFoundError("Leads not found!")
-    }
-
     res.status(200)
     res.json(leads)
   } catch (error) {
