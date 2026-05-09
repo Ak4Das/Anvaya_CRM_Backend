@@ -4,17 +4,15 @@ const agentCommentSchema = new mongoose.Schema(
   {
     lead: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Lead",
-      required: true,
+      required: [true, "lead must be a valid ObjectId."],
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "SalesAgent",
-      required: true,
+      required: [true, "author must be a valid ObjectId."],
     },
     commentText: {
       type: String,
-      required: true,
+      required: [true, "Comment text is required."],
     },
   },
   { timestamps: true },
