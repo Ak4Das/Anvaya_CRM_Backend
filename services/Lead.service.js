@@ -4,6 +4,7 @@ import {
   ValidationError,
 } from "../utils/customErrorHandler.js"
 import LeadModel from "../models/LeadData.model.js"
+import mongoose from "mongoose"
 
 function getStartAndEndDate(minDay, maxDay) {
   const today = new Date() // 2026-04-24
@@ -24,7 +25,13 @@ function getStartAndEndDate(minDay, maxDay) {
 
 export const getLeadsByPropertyInATimeRange = async (req, res) => {
   try {
-    const { minDay, maxDay, filters } = req.query
+    if (!req.query.minDay || !req.query.maxDay) {
+      throw new ValidationError("minDay and maxDay query are required.")
+    }
+
+    const { minDay, maxDay, filters: Filters } = req.query
+
+    let filters = Filters && JSON.parse(decodeURIComponent(Filters))
 
     const { startDate, endDate } = getStartAndEndDate(minDay, maxDay)
 
@@ -36,7 +43,7 @@ export const getLeadsByPropertyInATimeRange = async (req, res) => {
     }
 
     filters &&
-      Object.entries(JSON.parse(filters)).forEach(([key, value]) => {
+      Object.entries(filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
           filter[key] = value
         }
@@ -47,7 +54,7 @@ export const getLeadsByPropertyInATimeRange = async (req, res) => {
     res.status(200)
     res.json(leads)
   } catch (error) {
-    throw new BadRequestError(error.message, error.stack)
+    throw error
   }
 }
 
@@ -69,6 +76,10 @@ export const postNewLead = async (req, res) => {
 
 export const findLeadByIdAndUpdate = async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw new ValidationError("Invalid lead id")
+    }
+
     const lead = await LeadModel.findById(req.params.id)
 
     if (!lead) {
@@ -91,9 +102,7 @@ export const findLeadByIdAndUpdate = async (req, res) => {
     res.status(200)
     res.json(updatedLead)
   } catch (error) {
-    if (error.kind === "ObjectId") {
-      throw new BadRequestError(error.reason.message, error.reason.stack)
-    } else if (error.cause.code === 11000) {
+    if (error.cause.code === 11000) {
       const field = Object.keys(error.cause.keyPattern)[0]
       throw new ValidationError(`${field} must be unique`, error.cause)
     } else {
