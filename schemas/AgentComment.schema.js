@@ -5,7 +5,6 @@ export const agentCommentSchema = yup.object({
     .string()
     .strict()
     .typeError("lead id must be a string")
-    .required("lead id is required.")
     .matches(/^[0-9a-fA-F]{24}$/, "lead must be a valid ObjectId."),
   author: yup
     .string()
