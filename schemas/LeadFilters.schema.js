@@ -25,12 +25,6 @@ export const leadFilterSchema = yup.object({
       "status must be one of New, Contacted, Qualified, Proposal Sent, Closed, Lost.",
     )
     .notRequired(),
-  salesAgent: yup
-    .string()
-    .strict()
-    .typeError("salesAgent must be a string")
-    .matches(/^[0-9a-fA-F]{24}$/, "salesAgent must be a valid ObjectId.")
-    .notRequired(),
   source: yup
     .string()
     .strict()

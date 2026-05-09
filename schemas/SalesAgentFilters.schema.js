@@ -28,15 +28,6 @@ export const agentFiltersSchema = yup.object({
     .typeError("country must be a string")
     .matches(/^[A-Z]/, "First letter must be capital")
     .notRequired(),
-  phoneNumber: yup
-    .string()
-    .strict()
-    .typeError("phoneNumber must be a string")
-    .matches(
-      /^\(\+\d{1,3}\)\d+$/,
-      "Phone number must be in format (+91)9785578985",
-    )
-    .notRequired(),
   phoneNumberNormalized: yup
     .string()
     .strict()
@@ -64,12 +55,6 @@ export const agentFiltersSchema = yup.object({
     .typeError("profileImg must be a string")
     .notRequired(),
   role: yup.string().strict().typeError("role must be a string").notRequired(),
-  manager: yup
-    .string()
-    .strict()
-    .typeError("manager must be a string")
-    .matches(/^[0-9a-fA-F]{24}$/, "manager must be a valid ObjectId.")
-    .notRequired(),
   location: yup
     .string()
     .strict()
