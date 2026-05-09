@@ -3,20 +3,21 @@ import mongoose from "mongoose"
 const salesDataSchema = new mongoose.Schema({
   leadCode: {
     type: String,
-    unique: true,
+    unique: [true, "Lead code must be unique."],
+    required: [true, "Lead code is required."],
   },
   name: {
     type: String,
-    required: true,
+    required: [true, "name is required."],
   },
   status: {
     type: String,
     enum: ["Closed"],
-    required: true,
+    required: [true, "status is required."],
   },
   salesAgent: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    required: [true, "sales agent is required."],
   },
   closedAt: {
     type: String,
@@ -24,15 +25,14 @@ const salesDataSchema = new mongoose.Schema({
   },
   createdAt: {
     type: String,
-    required: true,
+    required: [true, "created date is required."],
   },
   updatedAt: {
     type: String,
-    required: true,
   },
   purchaseAmount: {
     type: Number,
-    required: true,
+    required: [true, "Purchase amount is required."],
   },
 })
 
