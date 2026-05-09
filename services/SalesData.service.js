@@ -1,4 +1,8 @@
 import SalesDataModel from "../models/SalesData.model.js"
+import {
+  BadRequestError,
+  ValidationError,
+} from "../utils/customErrorHandler.js"
 
 function getStartAndEndDate(minDay, maxDay) {
   const today = new Date() // 2026-04-24
@@ -17,12 +21,16 @@ function getStartAndEndDate(minDay, maxDay) {
   return { startDate, endDate }
 }
 
-export const getSalesDataByPropertyInATimeRange = async (
-  minDay,
-  maxDay,
-  filters,
-) => {
+export const getSalesDataByPropertyInATimeRange = async (req, res) => {
   try {
+    if (!req.query.minDay || !req.query.maxDay) {
+      throw new ValidationError("minDay and maxDay query are required.")
+    }
+
+    const { minDay, maxDay, filters: Filters } = req.query
+
+    let filters = Filters && JSON.parse(decodeURIComponent(Filters))
+
     const { startDate, endDate } = getStartAndEndDate(minDay, maxDay)
 
     const filter = {
@@ -41,16 +49,18 @@ export const getSalesDataByPropertyInATimeRange = async (
 
     const salesData = await SalesDataModel.find(filter)
 
-    return salesData
+    res.status(200)
+    res.json(salesData)
   } catch (error) {
     throw error
   }
 }
 
-export const getAllSalesData = async () => {
+export const getAllSalesData = async (req, res) => {
   try {
-    const saleSalesData = await SalesDataModel.find()
-    return saleSalesData
+    const salesData = await SalesDataModel.find()
+    res.status(200)
+    res.json(salesData)
   } catch (error) {
     throw error
   }
