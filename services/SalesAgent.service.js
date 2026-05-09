@@ -35,20 +35,33 @@ export const findByIdAndUpdate = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       throw new ValidationError("Invalid agent id")
     }
+
+    const agent = await SalesAgentModel.findById(req.params.id)
+
+    if (!agent) {
+      throw new NotFoundError("Agent not found!")
+    }
+
     const updatedAgent = await SalesAgentModel.findOneAndUpdate(
       { _id: req.params.id },
       req.body,
       {
         new: true,
+        runValidators: true,
       },
     )
-    if (!updatedAgent) {
-      throw new NotFoundError("Agent not found")
-    }
+
     res.status(200)
     res.json(updatedAgent)
   } catch (error) {
-    throw error
+    if (error.name === "ValidationError") {
+      throw new ValidationError(error.message, error.stack)
+    } else if (error.cause.code === 11000) {
+      const field = Object.keys(error.cause.keyPattern)[0]
+      throw new ValidationError(`${field} must be unique`, error.cause)
+    } else {
+      throw error
+    }
   }
 }
 
@@ -62,7 +75,7 @@ export const getAgentsByProperty = async (req, res) => {
     const filter = {}
 
     filters &&
-      Object.entries(JSON.parse(filters)).forEach(([key, value]) => {
+      Object.entries(filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
           filter[key] = value
         }
@@ -73,7 +86,11 @@ export const getAgentsByProperty = async (req, res) => {
     res.status(200)
     res.json(Agents)
   } catch (error) {
-    throw error
+    if(error.kind === "ObjectId") {
+      throw new ValidationError("Id must be a valid ObjectId")
+    } else {
+      throw error
+    }
   }
 }
 

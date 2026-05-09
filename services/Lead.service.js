@@ -54,7 +54,11 @@ export const getLeadsByPropertyInATimeRange = async (req, res) => {
     res.status(200)
     res.json(leads)
   } catch (error) {
-    throw error
+    if (error.kind === "ObjectId") {
+      throw new ValidationError("Id must be a valid ObjectId")
+    } else {
+      throw error
+    }
   }
 }
 
@@ -102,7 +106,9 @@ export const findLeadByIdAndUpdate = async (req, res) => {
     res.status(200)
     res.json(updatedLead)
   } catch (error) {
-    if (error.cause.code === 11000) {
+    if (error.name === "ValidationError") {
+      throw new ValidationError(error.message, error.stack)
+    } else if (error.cause.code === 11000) {
       const field = Object.keys(error.cause.keyPattern)[0]
       throw new ValidationError(`${field} must be unique`, error.cause)
     } else {

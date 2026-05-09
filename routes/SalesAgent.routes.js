@@ -7,6 +7,8 @@ import {
 } from "../controllers/SalesAgent.controller.js"
 import { agentSchema } from "../schemas/SalesAgent.schema.js"
 import { SchemaValidation } from "../middlewares/SchemaValidation.middleware.js"
+import { agentFiltersSchema } from "../schemas/SalesAgentFilters.schema.js"
+import { FiltersValidation } from "../middlewares/SchemaValidation.middleware.js"
 
 import express from "express"
 const router = express.Router()
@@ -15,7 +17,11 @@ router.get("/", fetchAllAgents)
 
 router.get("/name/:name", fetchAgentByName)
 
-router.get("/prop", fetchAgentsByProperty)
+router.get(
+  "/prop",
+  FiltersValidation(agentFiltersSchema),
+  fetchAgentsByProperty,
+)
 
 router.patch("/update/:id", fetchByIdAndUpdate)
 
