@@ -5,7 +5,7 @@ import {
 } from "../utils/customErrorHandler.js"
 
 function getStartAndEndDate(minDay, maxDay) {
-  const today = new Date() // 2026-04-24
+  const today = new Date() // 2026-05-12
 
   const firstPastDate = new Date()
   firstPastDate.setDate(today.getDate() - minDay)

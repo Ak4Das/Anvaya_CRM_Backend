@@ -7,7 +7,7 @@ import LeadModel from "../models/LeadData.model.js"
 import mongoose from "mongoose"
 
 function getStartAndEndDate(minDay, maxDay) {
-  const today = new Date() // 2026-04-24
+  const today = new Date() // 2026-05-12
 
   const firstPastDate = new Date()
   firstPastDate.setDate(today.getDate() - minDay)
