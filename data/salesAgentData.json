@@ -15,9 +15,11 @@
     "status": "Active",
     "__v": 0,
     "createdAt": "2026-04-24T06:34:31.674Z",
-    "updatedAt": "2026-04-27T05:20:44.548Z",
+    "updatedAt": "2026-05-13T18:18:17.308Z",
     "joinedDate": "2023-04-15",
-    "phoneNumberNormalized": "2079460958"
+    "phoneNumberNormalized": "2079460958",
+    "password": "sk@123456",
+    "address": "123 Rose Villa, Bannerghatta Road, Bangalore 560076"
   },
   {
     "_id": "69eb0ef758d2e0a67af9661e",
@@ -37,7 +39,9 @@
     "createdAt": "2026-04-24T06:34:31.675Z",
     "updatedAt": "2026-04-27T05:22:10.907Z",
     "joinedDate": "2020-07-06",
-    "phoneNumberNormalized": "412345678"
+    "phoneNumberNormalized": "412345678",
+    "password": "hc@123456",
+    "address": "234 Silver Oak Avenue, Jubilee Hills, Hyderabad 500033"
   },
   {
     "_id": "69eb0ef758d2e0a67af96619",
@@ -57,7 +61,9 @@
     "createdAt": "2026-04-24T06:34:31.674Z",
     "updatedAt": "2026-04-27T05:20:18.392Z",
     "joinedDate": "2023-07-25",
-    "phoneNumberNormalized": "9876543210"
+    "phoneNumberNormalized": "9876543210",
+    "password": "bk@123456",
+    "address": "789 Lotus Apartments, Juhu Beach Road, Mumbai 400049"
   },
   {
     "_id": "69eb0ef758d2e0a67af9661d",
@@ -77,7 +83,9 @@
     "createdAt": "2026-04-24T06:34:31.675Z",
     "updatedAt": "2026-04-27T05:21:46.424Z",
     "joinedDate": "2023-08-18",
-    "phoneNumberNormalized": "3123495678"
+    "phoneNumberNormalized": "3123495678",
+    "password": "yc@123456",
+    "address": "890 White Orchid Bungalow, Salt Lake City, Kolkata 700064"
   },
   {
     "_id": "69eb0ef758d2e0a67af96618",
@@ -95,9 +103,11 @@
     "status": "Active",
     "__v": 0,
     "createdAt": "2026-04-24T06:34:31.674Z",
-    "updatedAt": "2026-04-26T15:00:37.790Z",
+    "updatedAt": "2026-05-08T13:17:23.322Z",
     "joinedDate": "2024-06-24",
-    "phoneNumberNormalized": "2025550123"
+    "phoneNumberNormalized": "2025550123",
+    "password": "ad@123456",
+    "address": "456 Green Park Lane, Sector 12, Dwarka, New Delhi 110075"
   },
   {
     "_id": "69eb0ef758d2e0a67af96621",
@@ -117,7 +127,9 @@
     "createdAt": "2026-04-24T06:34:31.675Z",
     "updatedAt": "2026-04-26T15:05:20.428Z",
     "joinedDate": "2021-02-14",
-    "phoneNumberNormalized": "1012345678"
+    "phoneNumberNormalized": "1012345678",
+    "password": "dp@123456",
+    "address": "901 Hilltop Residence, Vasant Kunj, New Delhi 110070"
   },
   {
     "_id": "69eb0ef758d2e0a67af9661c",
@@ -137,7 +149,9 @@
     "createdAt": "2026-04-24T06:34:31.674Z",
     "updatedAt": "2026-04-26T15:02:49.749Z",
     "joinedDate": "2020-01-11",
-    "phoneNumberNormalized": "11987654321"
+    "phoneNumberNormalized": "11987654321",
+    "password": "pd@123456",
+    "address": "567 Blue Sky Towers, Koregaon Park, Pune 411001"
   },
   {
     "_id": "69eb0ef758d2e0a67af96620",
@@ -157,7 +171,9 @@
     "createdAt": "2026-04-24T06:34:31.675Z",
     "updatedAt": "2026-04-26T15:04:52.244Z",
     "joinedDate": "2024-09-23",
-    "phoneNumberNormalized": "123456789"
+    "phoneNumberNormalized": "123456789",
+    "password": "cd@123456",
+    "address": "345 River View Apartments, Indiranagar, Bangalore 560038"
   },
   {
     "_id": "69eb0ef758d2e0a67af9661b",
@@ -177,7 +193,9 @@
     "createdAt": "2026-04-24T06:34:31.674Z",
     "updatedAt": "2026-04-27T05:21:16.532Z",
     "joinedDate": "2024-03-31",
-    "phoneNumberNormalized": "301234567"
+    "phoneNumberNormalized": "301234567",
+    "password": "jc@123456",
+    "address": "321 Palm Grove Street, Anna Nagar, Chennai 600040"
   },
   {
     "_id": "69eb0ef758d2e0a67af9661f",
@@ -197,6 +215,30 @@
     "createdAt": "2026-04-24T06:34:31.675Z",
     "updatedAt": "2026-04-27T05:22:37.552Z",
     "joinedDate": "2023-10-21",
-    "phoneNumberNormalized": "8031234567"
+    "phoneNumberNormalized": "8031234567",
+    "password": "bm@123456",
+    "address": "678 Golden Nest Villa, MG Road, Gurgaon 122001"
+  },
+  {
+    "_id": "6a034f904bbdc70240d3ddec",
+    "agentCode": "AG-1502131670",
+    "name": "Akash Das",
+    "dateOfBirth": "2002-02-28",
+    "country": "India",
+    "phoneNumber": "(+91)9883620996",
+    "phoneNumberNormalized": "9883620996",
+    "email": "akashdas02052@gmail.com",
+    "address": "Dubrajpur, Birbhum",
+    "profileImg": "C:\\fakepath\\Screenshot 2026-04-23 182349.png",
+    "role": "Sales Agent",
+    "manager": "69eafb7ba796c8a7b4a87429",
+    "location": "Office",
+    "department": "Sales",
+    "joinedDate": "2026-05-12",
+    "status": "Active",
+    "password": "Ad@123456",
+    "createdAt": "2026-05-12T16:04:32.360Z",
+    "updatedAt": "2026-05-12T16:04:32.360Z",
+    "__v": 0
   }
 ]
