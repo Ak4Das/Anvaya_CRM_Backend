@@ -23,7 +23,11 @@ router.get(
   fetchAgentsByProperty,
 )
 
-router.patch("/update/:id", fetchByIdAndUpdate)
+router.patch(
+  "/update/:id",
+  SchemaValidation(agentFiltersSchema),
+  fetchByIdAndUpdate,
+)
 
 router.post("/addAgent", SchemaValidation(agentSchema), createANewAgent)
 

@@ -21,6 +21,6 @@ router.get(
 
 router.post("/addLead", SchemaValidation(leadSchema), createANewLead)
 
-router.patch("/update/:id", updateLead)
+router.patch("/update/:id", SchemaValidation(leadFilterSchema), updateLead)
 
 export default router
