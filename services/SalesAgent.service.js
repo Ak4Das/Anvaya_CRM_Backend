@@ -86,7 +86,7 @@ export const getAgentsByProperty = async (req, res) => {
     res.status(200)
     res.json(Agents)
   } catch (error) {
-    if(error.kind === "ObjectId") {
+    if (error.kind === "ObjectId") {
       throw new ValidationError("Id must be a valid ObjectId")
     } else {
       throw error
@@ -109,5 +109,16 @@ export const postNewAgent = async (req, res) => {
     } else {
       throw error
     }
+  }
+}
+
+export const getAgentByIdAndDelete = async (req, res) => {
+  try {
+    const { id } = req.params
+    const agent = await SalesAgentModel.findByIdAndDelete(id)
+    res.status(200)
+    res.json(agent)
+  } catch (error) {
+    throw error
   }
 }

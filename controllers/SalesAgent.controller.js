@@ -4,6 +4,7 @@ import {
   findByIdAndUpdate,
   getAgentsByProperty,
   postNewAgent,
+  getAgentByIdAndDelete
 } from "../services/SalesAgent.service.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 
@@ -16,3 +17,5 @@ export const fetchByIdAndUpdate = asyncHandler(findByIdAndUpdate)
 export const fetchAgentsByProperty = asyncHandler(getAgentsByProperty)
 
 export const createANewAgent = asyncHandler(postNewAgent)
+
+export const fetchByIdAndDelete = asyncHandler(getAgentByIdAndDelete)
