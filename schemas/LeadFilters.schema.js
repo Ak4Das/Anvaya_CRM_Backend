@@ -92,7 +92,7 @@ export const leadFilterSchema = yup.object({
     .string()
     .strict()
     .typeError("lostAt must be a string")
-    .matches(/^\d{4}-\d{2}-\d{2}$/, "lostAt must be in format yyyy-mm-dd")
+    .matches(/^$|^\d{4}-\d{2}-\d{2}$/, "lostAt must be in format yyyy-mm-dd")
     .notRequired(),
   createdAt: yup
     .string()
