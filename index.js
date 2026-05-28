@@ -32,6 +32,9 @@ app.use("/sales", salesDataRoutes)
 import agentCommentRoutes from "./routes/AgentComment.routes.js"
 app.use("/agentComment", agentCommentRoutes)
 
+import eventRoutes from "./routes/Event.routes.js"
+app.use("/event", eventRoutes)
+
 import { globalErrorHandler } from "./middlewares/errorMiddleware.js"
 app.use(globalErrorHandler)
 
