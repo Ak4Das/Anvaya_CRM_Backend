@@ -111,14 +111,3 @@ export const postNewAgent = async (req, res) => {
     }
   }
 }
-
-export const getAgentByIdAndDelete = async (req, res) => {
-  try {
-    const { id } = req.params
-    const agent = await SalesAgentModel.findByIdAndDelete(id)
-    res.status(200)
-    res.json(agent)
-  } catch (error) {
-    throw error
-  }
-}

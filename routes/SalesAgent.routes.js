@@ -4,7 +4,6 @@ import {
   fetchByIdAndUpdate,
   fetchAgentsByProperty,
   createANewAgent,
-  fetchByIdAndDelete
 } from "../controllers/SalesAgent.controller.js"
 import { agentSchema } from "../schemas/SalesAgent.schema.js"
 import { SchemaValidation } from "../middlewares/SchemaValidation.middleware.js"
@@ -31,7 +30,5 @@ router.patch(
 )
 
 router.post("/addAgent", SchemaValidation(agentSchema), createANewAgent)
-
-router.delete("/delete/:id", fetchByIdAndDelete)
 
 export default router
