@@ -92,6 +92,9 @@ const salesAgentSchema = new mongoose.Schema(
       unique: [true, "Password must be unique"],
       minlength: [6, "Password must contain at least 6 characters"],
     },
+    isInTeam: {
+      type: Boolean,
+    },
   },
   { timestamps: true },
 )
