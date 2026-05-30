@@ -10,7 +10,11 @@ export const getAllAgents = async (req, res) => {
   try {
     const saleAgents = await SalesAgentModel.find()
     res.status(200)
-    res.json(saleAgents)
+    res.json({
+      success: true,
+      message: "Agents fetched successfully",
+      respondedData: saleAgents,
+    })
   } catch (error) {
     throw error
   }
@@ -24,7 +28,11 @@ export const getAgentByName = async (req, res) => {
       throw new NotFoundError("Agent not found")
     }
     res.status(200)
-    res.json(agent)
+    res.json({
+      success: true,
+      message: "Agent fetched successfully",
+      respondedData: agent,
+    })
   } catch (error) {
     throw error
   }
@@ -52,7 +60,11 @@ export const findByIdAndUpdate = async (req, res) => {
     )
 
     res.status(200)
-    res.json(updatedAgent)
+    res.json({
+      success: true,
+      message: "Agent updated successfully",
+      respondedData: updatedAgent,
+    })
   } catch (error) {
     if (error.name === "ValidationError") {
       throw new ValidationError(error.message, error.stack)
@@ -84,7 +96,11 @@ export const getAgentsByProperty = async (req, res) => {
     const Agents = await SalesAgentModel.find(filter)
 
     res.status(200)
-    res.json(Agents)
+    res.json({
+      success: true,
+      message: "Agents fetched successfully",
+      respondedData: Agents,
+    })
   } catch (error) {
     if (error.kind === "ObjectId") {
       throw new ValidationError("Id must be a valid ObjectId")
@@ -99,7 +115,11 @@ export const postNewAgent = async (req, res) => {
     const NewAgent = new SalesAgentModel(req.body)
     await NewAgent.save()
     res.status(200)
-    res.json(NewAgent)
+    res.json({
+      success: true,
+      message: "Agents fetched successfully",
+      respondedData: NewAgent,
+    })
   } catch (error) {
     if (error.name === "ValidationError") {
       throw new ValidationError(error.message)

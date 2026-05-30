@@ -5,7 +5,7 @@ import {
 } from "../utils/customErrorHandler.js"
 
 function getStartAndEndDate(minDay, maxDay) {
-  const today = new Date() // 2026-05-12
+  const today = new Date() // 2026-05-28
 
   const firstPastDate = new Date()
   firstPastDate.setDate(today.getDate() - minDay)
@@ -50,7 +50,11 @@ export const getSalesDataByPropertyInATimeRange = async (req, res) => {
     const salesData = await SalesDataModel.find(filter)
 
     res.status(200)
-    res.json(salesData)
+    res.json({
+      success: true,
+      message: "Sales data fetched successfully",
+      respondedData: salesData,
+    })
   } catch (error) {
     throw error
   }
@@ -60,7 +64,11 @@ export const getAllSalesData = async (req, res) => {
   try {
     const salesData = await SalesDataModel.find()
     res.status(200)
-    res.json(salesData)
+    res.json({
+      success: true,
+      message: "Sales data fetched successfully",
+      respondedData: salesData,
+    })
   } catch (error) {
     throw error
   }

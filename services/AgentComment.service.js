@@ -21,7 +21,11 @@ export const createComment = async (req, res) => {
     const Comment = await AgentCommentModel.create(comment)
 
     res.status(200)
-    res.json(Comment)
+    res.json({
+      success: true,
+      message: "Comment created successfully",
+      respondedData: Comment,
+    })
   } catch (error) {
     if (error.kind === "ObjectId") {
       throw new ValidationError("Id must be a valid ObjectId")
@@ -44,7 +48,11 @@ export const getCommentsById = async (req, res) => {
     const comment = await AgentCommentModel.find({ lead: leadId })
 
     res.status(200)
-    res.json(comment)
+    res.json({
+      success: true,
+      message: "Comment fetched successfully",
+      respondedData: comment,
+    })
   } catch (error) {
     if (error.kind === "ObjectId") {
       throw new ValidationError("Id must be a valid ObjectId")

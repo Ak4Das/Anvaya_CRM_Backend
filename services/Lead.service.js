@@ -7,7 +7,7 @@ import LeadModel from "../models/LeadData.model.js"
 import mongoose from "mongoose"
 
 function getStartAndEndDate(minDay, maxDay) {
-  const today = new Date() // 2026-05-12
+  const today = new Date() // 2026-05-28
 
   const firstPastDate = new Date()
   firstPastDate.setDate(today.getDate() - minDay)
@@ -52,7 +52,11 @@ export const getLeadsByPropertyInATimeRange = async (req, res) => {
     const leads = await LeadModel.find(filter)
 
     res.status(200)
-    res.json(leads)
+    res.json({
+      success: true,
+      message: "Leads fetched successfully",
+      respondedData: leads,
+    })
   } catch (error) {
     if (error.kind === "ObjectId") {
       throw new ValidationError("Id must be a valid ObjectId")
@@ -67,7 +71,11 @@ export const postNewLead = async (req, res) => {
     const NewLead = new LeadModel(req.body)
     const savedLead = await NewLead.save()
     res.status(200)
-    res.json(savedLead)
+    res.json({
+      success: true,
+      message: "Lead created successfully",
+      respondedData: savedLead,
+    })
   } catch (error) {
     if (error.cause.code === 11000) {
       const field = Object.keys(error.cause.keyPattern)[0]
@@ -104,7 +112,11 @@ export const findLeadByIdAndUpdate = async (req, res) => {
     }
 
     res.status(200)
-    res.json(updatedLead)
+    res.json({
+      success: true,
+      message: "Lead updated successfully",
+      respondedData: updatedLead,
+    })
   } catch (error) {
     if (error.name === "ValidationError") {
       throw new ValidationError(error.message, error.stack)
