@@ -13,8 +13,8 @@ export const leadSchema = yup.object({
     .typeError("name must be a string")
     .required("Name is required")
     .matches(
-      /^[A-Z][a-z]+(?:\s[A-Z][a-z]+)+$/,
-      "Enter name in format like 'John Doe'",
+      /^[A-Z][a-z]*$/,
+      "Enter name in format like 'John'",
     ),
   status: yup
     .string()

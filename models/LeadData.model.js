@@ -11,8 +11,8 @@ const leadSchema = new mongoose.Schema({
     type: String,
     required: [true, "name is required."],
     match: [
-      /^[A-Za-z]+(?: [A-Za-z]+)+$/,
-      "Enter name in format like 'John Doe'",
+      /^[A-Z][a-z]*$/,
+      "Enter name in format like 'John'",
     ],
   },
   status: {
